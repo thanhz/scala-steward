@@ -1,2 +1,2 @@
 # repos.md
-- thanhz/test-repo
+- thanhz/test-repo-1
