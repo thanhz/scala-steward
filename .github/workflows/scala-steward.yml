@@ -7,6 +7,7 @@ name: Launch Scala Steward
 
 jobs:
   scala-steward:
+    permissions: write-all
     runs-on: ubuntu-22.04
     name: Launch Scala Steward
     steps:
