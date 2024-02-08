@@ -26,4 +26,5 @@ jobs:
         run: |
           for repo in ${{ steps.read-repos.outputs.repos }}; do
             echo "Repo: $repo"
-          done        
+          done
+        shell: bash
