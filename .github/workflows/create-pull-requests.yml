@@ -20,7 +20,7 @@ jobs:
             repo_name=$(echo "$line" | sed 's/^- //')
             repos_content+=("$repo_name")
             done < repositories.md
-            echo -e "::set-output name=repos::$repos_content"
+            echo "::set-output name=repos::$(printf '%s\n' "${repos_content[@]}" | jq -R -s 'split("\n")[:-1]')"
         shell: bash
 
       - name: Create Pull Request
