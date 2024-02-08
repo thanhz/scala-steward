@@ -1,14 +1,12 @@
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0'
 
 name: Test some script
 
 jobs:
   scala-steward:
     runs-on: ubuntu-22.04
-    name: Launch Scala Steward
+    name: Print some things
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -18,5 +16,5 @@ jobs:
         run: |
             while IFS= read -r line; do
             echo "Line: $line"
-            done < "$file"
+            done < repositories.md
         shell: bash
