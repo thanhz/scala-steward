@@ -15,6 +15,7 @@ jobs:
         id: read-repos
         run: |
             while IFS= read -r line; do
-            echo "Line: $line"
+            repo_name=$(echo "$line" | sed 's/^- //')
+            echo "Line: $repo_name"
             done < repositories.md
         shell: bash
