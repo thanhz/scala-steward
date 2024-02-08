@@ -18,4 +18,11 @@ jobs:
             repo_name=$(echo "$line" | sed 's/^- //')
             echo "Line: $repo_name"
             done < repositories.md
+            echo -e "::set-output name=repos::$repos_content"
         shell: bash
+
+      - name: Print the previous output
+        run: |
+          for repo in ${{ steps.read-repos.outputs.repos }}; do
+            echo "Line: $repo"
+          done        
