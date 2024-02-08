@@ -15,11 +15,12 @@ jobs:
       - name: Read repositories from file
         id: read-repos
         run: |
-          while IFS= read -r line; do
-            repo_name=$(echo $line | sed 's/^- //')
-            echo "$repo_name"
-          done < repositories2.md
-          echo "::set-output name=repos::$(<repositories2.md)"
+            repos_content=""
+            while IFS= read -r line; do
+            repo_name=$(echo "$line" | sed 's/^- //')
+            repos_content="$repos_content$repo_name\n"
+            done < repositories.md
+            echo -e "::set-output name=repos::$repos_content"
         shell: bash
 
       - name: Create Pull Request
