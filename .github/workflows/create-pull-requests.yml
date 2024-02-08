@@ -1,0 +1,38 @@
+name: Create pull request for develop branches
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * MON"
+
+jobs:
+  create-develop-pr:
+    runs-on: ubuntu-latest
+    name: Create PR from `develop` to `main` for multiple repositories
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read repositories from file
+        id: read-repos
+        run: |
+          cat repositories.txt
+          echo "::set-output name=repos::$(cat repositories.txt)"
+        shell: bash
+
+      - name: Create Pull Request
+        run: |
+          for repo in ${{ steps.read-repos.outputs.repos }}; do
+            develop=$(gh api /repos/$repo/commits/refs/heads/develop -q '.sha')
+            main=$(gh api /repos/$repo/commits/refs/heads/master -q '.sha')
+
+            if [[ $develop != $main ]]; then
+                gh api /repos/$repo/pulls \
+                  -f title="Scala Steward Updates" \
+                  -f base=master \
+                  -f head=develop
+            else
+                echo "There are no updates in $repo"
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}

@@ -20,5 +20,5 @@ jobs:
           author-name: scala-steward[bot]
           github-token: ${{ secrets.WORKFLOW_PAT }}
           branches: develop
-          # repos-file: REPOSITORIES.md
+          # repos-file: repositories.md
           github-repository: 'thanhz/test-repo-2'
