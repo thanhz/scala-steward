@@ -14,6 +14,7 @@ jobs:
       - name: Read repositories from file
         id: read-repos
         run: |
+            repos_content=""
             while IFS= read -r line; do
             repo_name=$(echo "$line" | sed 's/^- //')
             echo "Line: $repo_name"
@@ -24,5 +25,5 @@ jobs:
       - name: Print the previous output
         run: |
           for repo in ${{ steps.read-repos.outputs.repos }}; do
-            echo "Line: $repo"
+            echo "Repo: $repo"
           done        
