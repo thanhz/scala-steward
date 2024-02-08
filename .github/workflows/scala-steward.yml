@@ -21,4 +21,4 @@ jobs:
           github-token: ${{ secrets.WORKFLOW_PAT }}
           branches: develop
           # repos-file: REPOSITORIES.md
-          github-repository: 'thanhz/test-repo-1', 'thanhz/test-repo-2'
+          github-repository: 'thanhz/test-repo-2'
