@@ -18,8 +18,8 @@ jobs:
           while IFS= read -r line; do
             repo_name=$(echo $line | sed 's/^- //')
             echo "$repo_name"
-          done < repositories.txt
-          echo "::set-output name=repos::$(<repositories.txt)"
+          done < repositories.md
+          echo "::set-output name=repos::$(<repositories.md)"
         shell: bash
 
       - name: Create Pull Request
