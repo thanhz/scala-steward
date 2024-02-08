@@ -19,7 +19,7 @@ jobs:
             repo_name=$(echo $line | sed 's/^- //')
             echo "$repo_name"
           done < repositories.md
-          echo "::set-output name=repos::$(<repositories.md)"
+          echo "::set-output name=repos::$(repo_name)"
         shell: bash
 
       - name: Create Pull Request
