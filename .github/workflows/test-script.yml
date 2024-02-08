@@ -17,7 +17,7 @@ jobs:
             repos_content=""
             while IFS= read -r line; do
             repo_name=$(echo "$line" | sed 's/^- //')
-            repos_content+=$repo_name
+            repos_content+= $repo_name
             done < repositories.md
             echo -e "::set-output name=repos::$repos_content"
         shell: bash
