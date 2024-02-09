@@ -16,4 +16,5 @@ jobs:
           github-token: ${{ secrets.WORKFLOW_PAT }}
           author-email: scala-steward[bot]@users.noreply.github.com
           author-name: scala-steward[bot]
-          repos-file: 'repos.md'
+          branches: develop
+          github-repository: 'thanhz/test-repo-2'
