@@ -1,2 +1,3 @@
 # repos.md
-- nationalarchives/da-reference-generator
+- thanhz/test-repo-1
+- thanhz/test-repo-2
