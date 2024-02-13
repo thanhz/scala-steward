@@ -1,8 +1,6 @@
 name: Create pull request for develop branches
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * MON"
 
 jobs:
   create-develop-pr:
