@@ -26,8 +26,9 @@ jobs:
       - name: Create Pull Request
         run: |
           for repo in ${{ steps.read-repos.outputs.repos }}; do
+            default_branch=$(gh api /repos/$repo -q '.default_branch')
             develop=$(gh api /repos/$repo/commits/refs/heads/develop -q '.sha')
-            main=$(gh api /repos/$repo/commits/refs/heads/master -q '.sha')
+            main=$(gh api /repos/$repo/commits/refs/heads/$default_branch -q '.sha')
 
             if [[ $develop != $main ]]; then
                 gh api /repos/$repo/pulls \
