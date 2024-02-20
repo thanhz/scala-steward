@@ -26,7 +26,7 @@ jobs:
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             git config user.email "9700622+thanhz@users.noreply.github.com"
             git config user.name "thanhz"
-            git clone https://github.com/thanhz/test-repo1.git
+            git clone https://github.com/thanhz/test-repo-2.git
             cd ..
             git checkout develop
             git rebase origin/$default_branch
