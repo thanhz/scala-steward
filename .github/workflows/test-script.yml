@@ -11,7 +11,7 @@ jobs:
       - name: Check out my other private repo
         uses: actions/checkout@master
         with:
-          repository: thanhz/test-repo1
+          repository: thanhz/test-repo-1
           token: ${{ secrets.WORKFLOW_PAT }}
 
       - name: Read repositories from file
