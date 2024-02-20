@@ -20,7 +20,11 @@ jobs:
             done < repos.md
             echo -e "::set-output name=repos::$repos_content"
         shell: bash
-
+      - name: upsert branches
+        uses: thanhz/scala-steward/.github/workflows/upsert-scala-steward-dependencies-branch.yml@main
+        with:
+          repo: ${{ steps.read-repos.outputs.repos }}
+      
       - name: Create Pull Request
         run: |
           for repo in ${{ steps.read-repos.outputs.repos }}; do
