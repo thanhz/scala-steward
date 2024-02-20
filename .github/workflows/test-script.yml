@@ -15,10 +15,7 @@ jobs:
       - name: Loop through repositories
         run: |
           for repo in $REPOS; do
-            git clone $repo && cd $repo
-            git checkout main
-            git pull --rebase origin main
-            cd ..
+            echo repo
           done
 
       - name: Read repositories from file
