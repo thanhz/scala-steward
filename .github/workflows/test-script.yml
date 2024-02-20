@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: thanhz/test-repo1
-          token: ${{ secrets.my_pat }}
+          token: ${{ secrets.WORKFLOW_PAT }}
 
       - name: Read repositories from file
         id: read-repos
