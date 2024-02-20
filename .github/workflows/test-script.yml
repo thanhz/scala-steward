@@ -8,8 +8,18 @@ jobs:
     runs-on: ubuntu-22.04
     name: Print some things
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Read repository list
+        run: |
+          REPOS=$(cat repos.md)
+      - name: Loop through repositories
+        run: |
+          for repo in $REPOS; do
+            git clone $repo && cd $repo
+            git checkout main
+            git pull --rebase origin main
+            cd ..
+          done
 
       - name: Read repositories from file
         id: read-repos
