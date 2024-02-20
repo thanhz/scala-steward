@@ -11,10 +11,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Read repository list
         run: |
-          REPOS=$(cat repos.md)
+            repos_content=""
+            while IFS= read -r line; do
+            repo_name=$(echo "$line" | sed -e 's/^- //' -e 's/:develop//')
+            repos_content+="$repo_name "
+            done < repos.md
+            echo -e "::set-output name=repos2::$repos_content"
       - name: Loop through repositories
         run: |
-          for repo in $REPOS; do
+          for repo in ${{ steps.read-repos.outputs.repos2 }}; do
             echo repo
           done
 
