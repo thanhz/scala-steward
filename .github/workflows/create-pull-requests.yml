@@ -26,7 +26,7 @@ jobs:
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             git config user.email "9700622+thanhz@users.noreply.github.com"
             git config user.name "thanhz"
-            git checkout thanhz/develop
+            git checkout https://github.com/thanhz/$repo.git
             git rebase origin/$default_branch
             git push -f -u origin develop
           done  
