@@ -26,7 +26,8 @@ jobs:
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             echo $repo / $default_branch
             git clone https://github.com/$repo.git
-            git checkout scala-steward-dependencies
+            git checkout develop
+            git fetch origin $default_branch
           done  
         env:
             GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
