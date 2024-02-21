@@ -43,8 +43,10 @@ jobs:
                   -f head=develop
                   --jq '.url')
                 # Merge the PR with rebase
-                gh api -X PUT $pr_url/merge \
-                  --input <(echo '{"commit_title": "Rebase and merge", "merge_method": "rebase"}')
+                curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  $pr_url/merge \
+                  --data '{"commit_title": "Rebase and merge", "merge_method": "rebase"}'
             else
                 echo "There are no updates in $repo"
             fi
