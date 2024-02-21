@@ -21,6 +21,8 @@ jobs:
             echo -e "::set-output name=repos::$repos_content"
         shell: bash
       - name: Checkout & Rebase `develop` branch to latest `origin/main`
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_PAT }}
         run: |
           git config --global user.email "thanh.lam@nationalarchives.gov.uk"
           git config --global user.name "thanhz"
