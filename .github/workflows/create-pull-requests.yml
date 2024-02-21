@@ -26,8 +26,8 @@ jobs:
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             echo $repo / $default_branch
             git clone https://github.com/$repo.git
-            git checkout develop
             git fetch origin $default_branch
+            git checkout develop
           done  
         env:
             GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
