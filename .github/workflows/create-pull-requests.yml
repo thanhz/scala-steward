@@ -26,7 +26,7 @@ jobs:
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             echo $repo / $default_branch
             git clone https://github.com/$repo.git
-            echo ls
+            echo "$(ls)"
             cd $repo
           done  
         env:
