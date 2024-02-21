@@ -37,16 +37,13 @@ jobs:
             main=$(gh api /repos/$repo/commits/refs/heads/$default_branch -q '.sha')
 
             if [[ $develop != $main ]]; then
-                gh api /repos/$repo/pulls \
+                pr_url=$(gh api /repos/$repo/pulls \
                   -f title="Scala Steward Updates" \
                   -f base=$default_branch \
                   -f head=develop
                   --jq '.url')
-                # Merge the PR with rebase
-                curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                  -H "Accept: application/vnd.github.v3+json" \
-                  $pr_url/merge \
-                  --data '{"commit_title": "Rebase and merge", "merge_method": "rebase"}'
+                  gh api -X PUT $pr_url/merge \
+                    --input <(echo '{"commit_title": "Rebase and merge", "merge_method": "rebase"}')
             else
                 echo "There are no updates in $repo"
             fi
