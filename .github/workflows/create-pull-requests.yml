@@ -25,9 +25,7 @@ jobs:
           for repo in ${{ steps.read-repos.outputs.repos }}; do
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             echo $repo / $default_branch
-            git clone https://github.com/$repo.git
-            git fetch origin $default_branch
-            git checkout develop
+            #git clone https://github.com/$repo.git
           done  
         env:
             GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
@@ -43,6 +41,10 @@ jobs:
                   -f title="Scala Steward Updates" \
                   -f base=$default_branch \
                   -f head=develop
+                  --jq '.url')
+                # Merge the PR with rebase
+                gh api -X PUT $pr_url/merge \
+                  --input <(echo '{"commit_title": "Rebase and merge", "merge_method": "rebase"}')
             else
                 echo "There are no updates in $repo"
             fi
