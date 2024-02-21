@@ -25,6 +25,7 @@ jobs:
           for repo in ${{ steps.read-repos.outputs.repos }}; do
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             echo $repo / $default_branch
+            git clone https://github.com/$repo.git
           done  
         env:
             GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
