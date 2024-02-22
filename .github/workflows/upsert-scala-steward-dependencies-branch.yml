@@ -18,7 +18,6 @@ jobs:
             default_branch=$(gh api /repos/$repo -q '.default_branch')
             git clone -b develop --single-branch --depth 1 https://github.com/thanhz/${{ repo }}.git
             git config user.email "9700622+thanhz@users.noreply.github.com"
-            git config user.name "thanhz"
             git fetch origin/$default_branch
             git rebase origin/$default_branch
             git push -f origin scala-steward-dependencies
