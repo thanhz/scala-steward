@@ -1,11 +1,7 @@
 name: Upsert `develop` branch
 
 on:
-  workflow_call:
-    inputs:
-        repos:
-          required: true
-          type: string
+  workflow_dispatch:
 jobs:
   upsert-develop-branch:
     permissions: write-all
@@ -14,12 +10,10 @@ jobs:
     steps:
       - name: Checkout & Rebase `develop` branch to latest `origin/main`
         run: |
-          for repo in ${{ inputs.repo-name }}; do
-            default_branch=$(gh api /repos/$repo -q '.default_branch')
-            git clone -b develop --single-branch --depth 1 https://github.com/thanhz/${{ repo }}.git
-            git config user.email "9700622+thanhz@users.noreply.github.com"
-            git fetch origin/$default_branch
-            git rebase origin/$default_branch
-            git push -f origin scala-steward-dependencies
-          done    
+          default_branch=$(gh api /repos/$repo -q '.default_branch')
+          git clone -b develop --single-branch --depth 1 https://github.com/thanhz/${{ repo }}.git
+          git config user.email "9700622+thanhz@users.noreply.github.com"
+          git fetch origin/$default_branch
+          git rebase origin/$default_branch
+          git push -f origin scala-steward-dependencies 
           
