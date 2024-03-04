@@ -52,8 +52,6 @@ jobs:
                   -f title="Scala Steward Updates" \
                   -f base=$default_branch \
                   -f head=develop
-            else
-                echo "There are no updates in $repo"
             fi
           done
         env:
