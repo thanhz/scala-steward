@@ -20,26 +20,26 @@ jobs:
             done < repos.md
             echo -e "::set-output name=repos::$repos_content"
         shell: bash
-      - name: Checkout & Rebase `develop` branch to latest `origin/main`
-        env:
-          GH_TOKEN: ${{ secrets.WORKFLOW_PAT }}
-        run: |
-          git config --global user.email "thanh.lam@nationalarchives.gov.uk"
-          git config --global user.name "thanhz"
-          for repo in ${{ steps.read-repos.outputs.repos }}; do
-            default_branch=$(gh api /repos/$repo -q '.default_branch')
-            echo $repo / $default_branch
-            git clone https://github.com/$repo.git
-            cd $(basename $repo)
-            # git checkout $default_branch
-            # git pull origin $default_branch
-            git checkout develop
-            # git rebase $default_branch
-            # git push origin develop
-            git rebase origin/$default_branch
-            git push -f -u origin develop
-            cd ..
-          done  
+      # - name: Checkout & Rebase `develop` branch to latest `origin/main`
+      #   env:
+      #     GH_TOKEN: ${{ secrets.WORKFLOW_PAT }}
+      #   run: |
+      #     git config --global user.email "thanh.lam@nationalarchives.gov.uk"
+      #     git config --global user.name "thanhz"
+      #     for repo in ${{ steps.read-repos.outputs.repos }}; do
+      #       default_branch=$(gh api /repos/$repo -q '.default_branch')
+      #       echo $repo / $default_branch
+      #       git clone https://github.com/$repo.git
+      #       cd $(basename $repo)
+      #       # git checkout $default_branch
+      #       # git pull origin $default_branch
+      #       git checkout develop
+      #       # git rebase $default_branch
+      #       # git push origin develop
+      #       git rebase origin/$default_branch
+      #       git push -f -u origin develop
+      #       cd ..
+      #     done  
       - name: Create Pull Request
         run: |
           for repo in ${{ steps.read-repos.outputs.repos }}; do
