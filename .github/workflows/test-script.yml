@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-22.04
     name: Print some things
     steps:
-      # - name: Check out my other private repo
-      #   uses: actions/checkout@master
-      #   with:
-      #     repository: thanhz/test-repo-1
-      #     token: ${{ secrets.WORKFLOW_PAT }}
+      - name: Check out my other private repo
+        uses: actions/checkout@master
+        # with:
+        #   repository: thanhz/test-repo-1
+        #   token: ${{ secrets.WORKFLOW_PAT }}
 
       - name: Read repositories from file
         id: read-repos
