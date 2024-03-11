@@ -30,7 +30,7 @@ jobs:
           for repo in ${{ steps.read-repos.outputs.repos }}; do
             echo "Repo: $repo"
           done
-          sleep $((RANDOM % 60))  # Sleep for a random number of seconds between 0-59
+          sleep 90s
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
