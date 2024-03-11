@@ -28,7 +28,7 @@ jobs:
       - name: Print the previous output
         run: |
           # Fetch default branches and latest commits for all repositories in a single request
-          repos_info=$(gh api /repos --query "names=${{ steps.read-repos.outputs.repos }}" -q '.[] | {name: .name, default_branch:.default_branch, develop_commit:(.default_branch | @sh) }')
+          repos_info=$(gh api /repos --jq "names=${{ steps.read-repos.outputs.repos }}" -q '.[] | {name: .name, default_branch:.default_branch, develop_commit:(.default_branch | @sh) }')
           for repo in $repos_info; do
             echo "Repo: $repo"
           done
