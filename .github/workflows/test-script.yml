@@ -27,11 +27,6 @@ jobs:
 
       - name: Print the previous output
         run: |
-          # Call gh api to get default branches for all repos in one go
-          gh api /repos?q=${{ steps.read-repos.outputs.repos }} -t per-page=100 | jq -r '.[].name, .[].default_branch' > ${{ github.workspace }}/default_branches.txt
-
-          echo "$default_branch"
-          
           for repo in ${{ steps.read-repos.outputs.repos }}; do
             echo "Repo: $repo"
           done
